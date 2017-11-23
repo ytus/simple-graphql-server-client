@@ -1,5 +1,10 @@
 # simple-graphql-server-client
 
+Server is here: https://github.com/ytus/simple-graphql-server-client/blob/master/server/server.js
+Schema is here: https://github.com/ytus/simple-graphql-server-client/blob/master/server/schema.js
+Client is here: https://github.com/ytus/simple-graphql-server-client/blob/master/client/src/App.js
+! Client is not necessary, running server and GraphiQL is enough, see below.
+
 Clone:
 
 > git clone https://github.com/ytus/simple-graphql-server-client.git
