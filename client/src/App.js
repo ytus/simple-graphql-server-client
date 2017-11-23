@@ -55,13 +55,16 @@ const upvotePost = () =>
     JSON.stringify({
       query: `mutation UpvotePost($postId: Int!) {
         upvotePost(postId: $postId) {
-          id, 
-          title,
-          votes,
-          author {
-            firstName,
-            lastName
-          }
+          post {
+            id, 
+            title,
+            votes,
+            author {
+              firstName,
+              lastName
+            }
+          },
+          errors
         }
       }`,
       variables: {
