@@ -1,0 +1,27 @@
+{
+  "name": "commandline",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start-babel": "npx babel-node server.js",
+    "start": "nodemon --exec 'npm run start-babel'"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "cors": "^2.8.4",
+    "express": "^4.16.2",
+    "express-graphql": "^0.6.11",
+    "graphql": "^0.11.7",
+    "lodash": "^4.17.4",
+    "nodemon": "^1.12.1",
+    "prettier": "^1.8.2",
+    "react-create-app": "^2.0.6"
+  },
+  "devDependencies": {
+    "babel-preset-env": "^1.6.1"
+  }
+}

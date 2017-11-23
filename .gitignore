@@ -1,0 +1,10 @@
+.idea
+.idea
+.vscode
+.tags
+.eslintcache
+.agignore
+**/node_modules
+**/npm-debug.log
+**/dist
+**/.tmp
