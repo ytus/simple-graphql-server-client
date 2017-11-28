@@ -22,17 +22,17 @@ const posts = [
 
 const dao = {
   getPost(postId) {
-    console.log("context.getPost", postId);
+    console.log("dao.getPost", postId);
     return posts.find(p => p.id === postId);
   },
   getAllPosts() {
-    console.log("context.getAllPosts");
+    console.log("dao.getAllPosts");
     return posts;
   },
   getPosts(authorId, titleStarts) {
-    console.log("context.getPosts", authorId, titleStarts);
+    console.log("dao.getPosts", authorId, titleStarts);
     return posts.filter(p => {
-      if (p.author !== authorId) {
+      if (authorId != null && p.author !== authorId) {
         return false;
       }
       if (titleStarts != null && !p.title.startsWith(titleStarts)) {
@@ -42,25 +42,36 @@ const dao = {
     });
   },
   getAuthor(authorId) {
-    console.log("context.getAuthor", authorId);
+    console.log("dao.getAuthor", authorId);
     return authors.find(a => a.id === authorId);
   },
-  upvotePost(postId) {
-    console.log("context.upvotePost", postId);
-    const post = this.getPost(postId);
-
-    // validation
-    if (post == null) {
+  getAllAuthors() {
+    console.log("dao.getAllAuthors");
+    return authors;
+  },
+  getAuthors(authorId, titleStarts) {
+    console.log("dao.getAuthors", authorId, titleStarts);
+    return authors.filter(a => {
+      if (authorId != null && a.id !== authorId) {
+        return false;
+      }
+      return true;
+    });
+  },
+  changeAuthor(id, firstName, lastName) {
+    console.log("dao.changeAuthor", id, firstName, lastName);
+    const author = this.getAuthor(id);
+    if (author == null) {
       return {
         post: null,
-        errors: [`Couldn't find post with id ${postId}`]
+        errors: [`Couldn't find author with id ${postId}`]
       };
     }
 
-    // mutation
-    post.votes += 1;
+    author.firstName = firstName;
+    author.lastName = lastName;
     return {
-      post,
+      author,
       errors: []
     };
   }

@@ -32,6 +32,6 @@ Client is not necessary, running server and GraphiQL is enough. But if you want 
 
 > npm start
 
-and http://localhost:3000/ will open automatically. 
+and http://localhost:3000/ will open automatically.
 
-The source of the client app is here: https://github.com/ytus/simple-graphql-server-client/blob/master/client/src/App.js
+The source of the client app is here: https://github.com/ytus/simple-graphql-server-client/blob/master/client/src/AppApollo.js

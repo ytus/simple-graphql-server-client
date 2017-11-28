@@ -19,7 +19,7 @@ const authorType = new GraphQLObjectType({
       args: {
         titleStarts: {
           description: "beginning of the title",
-          type: new GraphQLNonNull(GraphQLString)
+          type: GraphQLString
         }
       },
       resolve: (author, args, context) => {
@@ -66,6 +66,22 @@ const queryType = new GraphQLObjectType({
         return context.dao.getAuthor(args.id);
       }
     },
+    authors: {
+      type: new GraphQLList(authorType),
+      args: {
+        id: {
+          description: "id of author",
+          type: GraphQLInt
+        },
+        titleStarts: {
+          description: "beginning of the title",
+          type: GraphQLString
+        }
+      },
+      resolve: (root, args, context) => {
+        return context.dao.getAuthors(args.id, args.titleStarts);
+      }
+    },
     post: {
       type: postType,
       args: {
@@ -81,11 +97,11 @@ const queryType = new GraphQLObjectType({
   }
 });
 
-const upvoteResultType = new GraphQLObjectType({
-  name: "UpvoteResultType",
+const changeAuthorResultType = new GraphQLObjectType({
+  name: "ChangeAuthorResultType",
   fields: () => ({
-    post: {
-      type: postType
+    author: {
+      type: authorType
     },
     errors: {
       type: new GraphQLList(GraphQLString)
@@ -97,11 +113,15 @@ const mutationType = new GraphQLObjectType({
   name: "Mutation",
   fields: () => ({
     // each field is mutation
-    upvotePost: {
-      type: upvoteResultType, // return type of the mutation
-      args: { postId: { type: GraphQLInt } },
+    changeAuthor: {
+      type: changeAuthorResultType,
+      args: {
+        id: { type: GraphQLInt },
+        firstName: { type: GraphQLString },
+        lastName: { type: GraphQLString }
+      },
       resolve: (root, args, context) => {
-        return context.dao.upvotePost(args.postId);
+        return context.dao.changeAuthor(args.id, args.firstName, args.lastName);
       }
     }
   })
