@@ -6,6 +6,7 @@ import { initDB } from "./db/db.js";
 import { schema } from "./schema.js";
 
 const db = initDB();
+db.on("trace", sql => console.log(sql))
 
 const sqlToPromise = (dbFun, sql, params) => {
   return new Promise((res, rej) => {
@@ -51,14 +52,14 @@ const dao = {
       return allToPromise("SELECT * FROM posts WHERE author = ?;", [authorId]);
     }
     if (authorId == null && titleStarts != null) {
-      return allToPromise("SELECT * FROM posts WHERE title BEGINS ?;", [
-        titleStarts
+      return allToPromise("SELECT * FROMd posts WHERE title LIKE ?;", [
+        titleStarts + "%"
       ]);
     }
 
     return allToPromise(
-      "SELECT * FROM posts WHERE author = ? AND title BEGINS ?;",
-      [authorId, titleStarts]
+      "SELECT * FROM posts WHERE author = ? AND title LIKE ?;",
+      [authorId, titleStarts + "%"]
     );
   },
   getAuthor(authorId) {

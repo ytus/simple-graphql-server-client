@@ -54,6 +54,8 @@ export class AuthorSearch extends Component {
     super(props);
     this.watchAuthorsSubscription = null;
     this.state = {
+      authorId: "",
+      titleStarts: "",
       authorsPosts: []
     };
   }
@@ -124,12 +126,29 @@ export class AuthorSearch extends Component {
                   if (this.watchAuthorsSubscription != null) {
                     this.watchAuthorsSubscription.unsubscribe();
                   }
+
+                  let realAuthorId = null;
+                  if (
+                    this.state.authorId != null &&
+                    this.state.authorId != ""
+                  ) {
+                    realAuthorId = Number.parseInt(this.state.authorId, 10);
+                  }
+
+                  let realTitleStarts = null;
+                  if (
+                    this.state.titleStarts != null &&
+                    this.state.titleStarts != ""
+                  ) {
+                    realTitleStarts = this.state.titleStarts;
+                  }
+
                   this.props.entityProvider
                     .runQuery({
                       query: this.queries.authorsPostsQ.query,
                       params: {
-                        id: this.state.authorId,
-                        titleStarts: this.state.titleStarts
+                        id: realAuthorId,
+                        titleStarts: realTitleStarts
                       }
                     })
                     .then(this.queries.authorsPostsQ.handleData);
@@ -138,8 +157,8 @@ export class AuthorSearch extends Component {
                     {
                       query: this.queries.authorsPostsQ.query,
                       params: {
-                        id: this.state.authorId,
-                        titleStarts: this.state.titleStarts
+                        id: realAuthorId,
+                        titleStarts: realTitleStarts
                       },
                       next: this.queries.authorsPostsQ.handleData
                     }
