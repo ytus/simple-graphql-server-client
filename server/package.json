@@ -5,12 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start-apollo-babel": "npx babel-node ./apollo/server.js",
-    "start-apollo": "nodemon --exec 'npm run start-apollo-babel'",
-    "start-relay-babel": "npx babel-node ./relay/server.js",
-    "start-relay": "nodemon --exec 'npm run start-relay-babel'",
-    "start": "echo \"use 'npm run start-relay' or 'npm run start-apollo'\"",
-    "update-schema": "babel-node ./relay/updateSchema.js"
+    "start-babel": "npx babel-node server.js",
+    "start": "nodemon --exec 'npm run start-babel'"
   },
   "author": "",
   "license": "ISC",

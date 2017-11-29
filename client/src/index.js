@@ -1,10 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import { App as AppApollo } from "./apollo/AppApollo";
-// import { App as AppRelay } from "./relay/AppRelay";
+import App from "./apollo/AppApollo";
 import registerServiceWorker from "./registerServiceWorker";
 
-ReactDOM.render(<AppApollo />, document.getElementById("root"));
+ReactDOM.render(<App />, document.getElementById("root"));
 
 registerServiceWorker();
