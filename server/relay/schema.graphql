@@ -1,0 +1,44 @@
+type Author {
+  id: Int
+  firstName: String
+  lastName: String
+  posts(
+    # beginning of the title
+    titleStarts: String
+  ): [Post]
+}
+
+type ChangeAuthorResultType {
+  author: Author
+  errors: [String]
+}
+
+type Mutation {
+  changeAuthor(id: Int, firstName: String, lastName: String): ChangeAuthorResultType
+}
+
+type Post {
+  id: Int
+  title: String
+  votes: Int
+  author: Author
+}
+
+type Query {
+  posts: [Post]
+  author(
+    # id of author
+    id: Int!
+  ): Author
+  authors(
+    # id of author
+    id: Int
+
+    # beginning of the title
+    titleStarts: String
+  ): [Author]
+  post(
+    # id of post
+    id: Int!
+  ): Post
+}
