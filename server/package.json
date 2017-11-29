@@ -1,5 +1,5 @@
 {
-  "name": "commandline",
+  "name": "simple-graphql-server-client-server",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -23,7 +23,8 @@
     "lodash": "^4.17.4",
     "nodemon": "^1.12.1",
     "prettier": "^1.8.2",
-    "react-create-app": "^2.0.6"
+    "react-create-app": "^2.0.6",
+    "sqlite3": "^3.1.13"
   },
   "devDependencies": {
     "babel-preset-env": "^1.6.1"
