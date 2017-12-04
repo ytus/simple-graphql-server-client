@@ -23,7 +23,11 @@ const authorType = new GraphQLObjectType({
         }
       },
       resolve: (author, args, context) => {
-        return context.dao.getPosts(author.id, args.titleStarts);
+        return context.dao.getPosts(
+          context.loaders,
+          author.id,
+          args.titleStarts
+        );
       }
     }
   })
@@ -38,7 +42,7 @@ const postType = new GraphQLObjectType({
     author: {
       type: authorType,
       resolve: (post, args, context) => {
-        return context.dao.getAuthor(post.author);
+        return context.dao.getAuthor(context.loaders, post.author);
       }
     }
   })
@@ -51,7 +55,7 @@ const queryType = new GraphQLObjectType({
       type: new GraphQLList(postType),
       args: {},
       resolve: function(root, args, context) {
-        return context.dao.getAllPosts();
+        return context.dao.getAllPosts(context.loaders);
       }
     },
     author: {
@@ -63,36 +67,36 @@ const queryType = new GraphQLObjectType({
         }
       },
       resolve: (root, args, context) => {
-        return context.dao.getAuthor(args.id);
+        return context.dao.getAuthor(context.loaders, args.id);
+      }
+    }
+  },
+  authors: {
+    type: new GraphQLList(authorType),
+    args: {
+      id: {
+        description: "id of author",
+        type: GraphQLInt
+      },
+      titleStarts: {
+        description: "beginning of the title",
+        type: GraphQLString
       }
     },
-    authors: {
-      type: new GraphQLList(authorType),
-      args: {
-        id: {
-          description: "id of author",
-          type: GraphQLInt
-        },
-        titleStarts: {
-          description: "beginning of the title",
-          type: GraphQLString
-        }
-      },
-      resolve: (root, args, context) => {
-        return context.dao.getAuthors(args.id, args.titleStarts);
+    resolve: (root, args, context) => {
+      return context.dao.getAuthors(context.loaders, args.id, args.titleStarts);
+    }
+  },
+  post: {
+    type: postType,
+    args: {
+      id: {
+        description: "id of post",
+        type: new GraphQLNonNull(GraphQLInt)
       }
     },
-    post: {
-      type: postType,
-      args: {
-        id: {
-          description: "id of post",
-          type: new GraphQLNonNull(GraphQLInt)
-        }
-      },
-      resolve: (root, args, context) => {
-        return context.dao.getPost(args.id);
-      }
+    resolve: (root, args, context) => {
+      return context.dao.getPost(context.loaders, args.id);
     }
   }
 });
@@ -112,7 +116,6 @@ const changeAuthorResultType = new GraphQLObjectType({
 const mutationType = new GraphQLObjectType({
   name: "Mutation",
   fields: () => ({
-    // each field is mutation
     changeAuthor: {
       type: changeAuthorResultType,
       args: {
@@ -121,7 +124,12 @@ const mutationType = new GraphQLObjectType({
         lastName: { type: GraphQLString }
       },
       resolve: (root, args, context) => {
-        return context.dao.changeAuthor(args.id, args.firstName, args.lastName);
+        return context.dao.changeAuthor(
+          context.loaders,
+          args.id,
+          args.firstName,
+          args.lastName
+        );
       }
     }
   })
