@@ -20,9 +20,9 @@ and open [GraphiQL](http://localhost:4000/graphql?query=%23%20Welcome%20to%20Gra
 
 
 
-Server is here: https://github.com/ytus/simple-graphql-server-client/blob/master/server/server.js
+Server is here: https://github.com/ytus/simple-graphql-server-client/blob/master/server/Server.js
 
-Schema is here: https://github.com/ytus/simple-graphql-server-client/blob/master/server/schema.js
+Schema is here: https://github.com/ytus/simple-graphql-server-client/blob/master/server/Schema.js
 
 Client is not necessary, running server and GraphiQL is enough. But if you want to try simple react app that calls the server:
 
